@@ -12,13 +12,13 @@ firebase.initializeApp(config);
 
 let database = firebase.database();
 
-$('#addTrainBtn').on("click", function() {
+$('.addTrainBtn').on("click", function() {
 
   // take user input
-  let trainName = $("#trainNameInput").val().trim();
-  let destination = $("#destinationInput").val().trim();
-  let firstTrain = moment($("#timeInput").val().trim(), "HH:mm").format("HH:mm");
-  let frequency = $("#frequencyInput").val().trim();
+  let trainName = $(".trainNameInput").val().trim();
+  let destination = $(".destinationInput").val().trim();
+  let firstTrain = moment($(".timeInput").val().trim(), "HH:mm").format("HH:mm");
+  let frequency = $(".frequencyInput").val().trim();
 
   //creates local temporary object to hold train data
   let newTrain = {
@@ -32,10 +32,10 @@ $('#addTrainBtn').on("click", function() {
   database.ref().push(newTrain);
 
   // clears all the text-boxes
-  $("#trainNameInput").val("");
-  $("#destinationInput").val("");
-  $("#timeInput").val("");
-  $("#frequencyInput").val("");
+  $(".trainNameInput").val("");
+  $(".destinationInput").val("");
+  $(".timeInput").val("");
+  $(".frequencyInput").val("");
 
   // Prevents moving to new page
   return false;
@@ -61,6 +61,6 @@ database.ref().on("child_added", childSnapshot => {
   let nxTrain = moment().add(minToTrain, "minutes").format("HH:mm");
 
   //adds new train into the html
-  $("#trainTable>tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + nxTrain + "</td><td>" + frequency + "</td><td>" + minToTrain + "</td></tr>");
+  $(".trainTable>tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + nxTrain + "</td><td>" + frequency + "</td><td>" + minToTrain + "</td></tr>");
 
 });
